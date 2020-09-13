@@ -1,19 +1,34 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <MapContainer id="map-container"/>
+    <EditPanel v-if="Boolean(selectedItem)" :item="selectedItem" id="edit-panel"/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import {mapGetters} from 'vuex'
+import MapContainer from './components/MapContainer.vue';
+import EditPanel from './components/EditPanel.vue';
+import zoneService from './services/items.js';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MapContainer,
+    EditPanel
+  },
+  mounted() {
+    this.loadData();
+  },
+  computed:{
+    ...mapGetters(['selectedItem'])
+  },
+  methods: {
+    loadData() {
+      zoneService.fetchItems();
+    }
   }
-}
+};
 </script>
 
 <style>
@@ -23,6 +38,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  display: grid;
+  height: 100vh;
+  width: 100vw;
 }
+
+#edit-panel {
+  display: flex;
+  position: absolute;
+  right: 0;
+  background: white;
+  height: 100%;
+  padding: 1em;
+  box-shadow: 0 0 5px 0 #949494;
+  min-width: 400px;
+}
+
 </style>

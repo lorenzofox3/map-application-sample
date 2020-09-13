@@ -1,0 +1,2 @@
+export const MAP_BOX_TOKEN=process.env.VUE_APP_MAPBOX_TOKEN
+export const MAP_BOX_STYLE=process.env.VUE_APP_MAPBOX_STYLE

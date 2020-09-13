@@ -1,0 +1,193 @@
+import {normalize} from '../src/utils.js';
+
+const fixture = {
+    'type': 'FeatureCollection',
+    'features': [
+        {
+            'type': 'Feature',
+            'properties': {
+                'id': 1,
+                'name': 'zone 1',
+                'item_type': 'zone'
+            },
+            'geometry': {
+                'type': 'Polygon',
+                'coordinates': [
+                    [
+                        [
+                            -1.494140625,
+                            47.82053186746053
+                        ],
+                        [
+                            -0.758056640625,
+                            46.93526088057719
+                        ],
+                        [
+                            0.87890625,
+                            46.76996843356982
+                        ],
+                        [
+                            1.7358398437499998,
+                            47.82053186746053
+                        ],
+                        [
+                            -0.28564453125,
+                            48.95858066440977
+                        ],
+                        [
+                            -1.494140625,
+                            47.82053186746053
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'id': 2,
+                'name': 'zone 2',
+                'item_type': 'zone'
+            },
+            'geometry': {
+                'type': 'Polygon',
+                'coordinates': [
+                    [
+                        [
+                            2.79052734375,
+                            48.72720881940671
+                        ],
+                        [
+                            3.658447265625,
+                            49.081062364320736
+                        ],
+                        [
+                            2.8894042968749996,
+                            49.745781306155735
+                        ],
+                        [
+                            1.4392089843749998,
+                            49.33944093715546
+                        ],
+                        [
+                            2.79052734375,
+                            48.72720881940671
+                        ]
+                    ]
+                ]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'id': 3,
+                'name': 'point 1',
+                'parent_id': 2,
+                'item_type': 'point'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [
+                    2.5048828125,
+                    49.32512199104001
+                ]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'name': 'point 2',
+                'id': 4,
+                'item_type': 'point',
+                'parent_id': 2
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [
+                    3.218994140625,
+                    49.095452162534826
+                ]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'name': 'point 3',
+                'id': 5,
+                'parent_id': 1,
+                'item_type': 'point'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [
+                    -0.648193359375,
+                    47.82790816919329
+                ]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'id': 6,
+                'parent_id': 1,
+                'name': 'point 4',
+                'item_type': 'point'
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [
+                    1.021728515625,
+                    47.487513008956554
+                ]
+            }
+        }
+    ]
+};
+
+export default (t) => {
+    t.test('normalize', (t) => {
+        const items = normalize(fixture);
+        t.eq(items, {
+            '1': {
+                id: 1,
+                name: 'zone 1',
+                item_type: 'zone',
+                geometry: fixture.features[0].geometry
+            },
+            '2': {
+                id: 2,
+                name: 'zone 2',
+                item_type: 'zone',
+                geometry: fixture.features[1].geometry
+            },
+            '3': {
+                id: 3,
+                name: 'point 1',
+                parent_id: 2,
+                item_type: 'point',
+                geometry: fixture.features[2].geometry
+            },
+            '4': {
+                id: 4,
+                name: 'point 2',
+                parent_id: 2,
+                item_type: 'point',
+                geometry: fixture.features[3].geometry
+            },
+            '5': {
+                id: 5,
+                name: 'point 3',
+                parent_id: 1,
+                item_type: 'point',
+                geometry: fixture.features[4].geometry
+            },
+            '6': {
+                id: 6,
+                name: 'point 4',
+                parent_id: 1,
+                item_type: 'point',
+                geometry: fixture.features[5].geometry
+            }
+        });
+    });
+}

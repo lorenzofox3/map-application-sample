@@ -1,24 +1,25 @@
 # map-app
 
 ## Project setup
+
 ```
 npm install
 ```
+
+get a token and a style url from Mapbox if required and put them is a ``.env`` file as in the example
 
 ### Compiles and hot-reloads for development
 ```
 npm run serve
 ```
 
-### Compiles and minifies for production
+### Test
+
 ```
-npm run build
+npm t
 ```
 
 ### Lints and fixes files
 ```
 npm run lint
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
