@@ -27,7 +27,7 @@ const mutations = {
     }
 };
 
-const getters = {
+export const getters = {
     items(state) {
         return Object.values(deepClone(state.entities.items));
     },
